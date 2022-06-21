@@ -25,6 +25,7 @@ export class UserinfoEndpoint extends AbstractProtectedResourceEndpoint {
               sub: endpointInfo.userId,
               name: userRecord.displayName,
               email: userRecord.email,
+              scopes: endpointInfo.scope.split(" ")
             })
           );
         })
