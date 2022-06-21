@@ -7,8 +7,8 @@ import { RequestWrapper } from "../models";
 import { CustomGrantHandlerProvider } from "../granttype";
 import { CloudFirestoreDataHandlerFactory } from "../data";
 
-export function token() {
-  return functions.https.onRequest(async (req, resp) => {
+export function token(regions: string[]) {
+  return functions.region(...regions).https.onRequest(async (req, resp) => {
     if (req.method === "POST") {
       const request = new RequestWrapper(req);
       const tokenEndpoint = new TokenEndpoint();

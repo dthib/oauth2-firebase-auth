@@ -98,6 +98,6 @@ authorizeApp.post("/consent", async (req, resp) => {
   });
 });
 
-export function authorize() {
-  return functions.https.onRequest(authorizeApp);
+export function authorize(regions: string[]) {
+  return functions.region(...regions).https.onRequest(authorizeApp);
 }

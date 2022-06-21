@@ -12,8 +12,14 @@ import { RequestWrapper } from "../../models";
 import { Navigation } from "../../utils";
 
 export abstract class AbstractProtectedResourceEndpoint {
+  regions: string[];
+
+  constructor(regions: string[]) {
+    this.regions = regions;
+  }
+
   public get endpoint(): functions.HttpsFunction {
-    return functions.https.onRequest(async (req, resp) => {
+    return functions.region(...this.regions).https.onRequest(async (req, resp) => {
       const request = new RequestWrapper(req);
       const protectedResourceEndpoint = new ProtectedResourceEndpoint();
 

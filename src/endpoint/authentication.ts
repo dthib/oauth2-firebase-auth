@@ -110,20 +110,20 @@ class AuthenticationApp {
   }
 }
 
-export function googleAccountAuthentication() {
-  return functions.https.onRequest(AuthenticationApp.create("Google"));
+export function googleAccountAuthentication(regions: string[]) {
+  return functions.region(...regions).https.onRequest(AuthenticationApp.create("Google"));
 }
 
-export function facebookAccountAuthentication() {
-  return functions.https.onRequest(AuthenticationApp.create("Facebook"));
+export function facebookAccountAuthentication(regions: string[]) {
+  return functions.region(...regions).https.onRequest(AuthenticationApp.create("Facebook"));
 }
 
-export function githubAccountAuthentication() {
-  return functions.https.onRequest(AuthenticationApp.create("Github"));
+export function githubAccountAuthentication(regions: string[]) {
+  return functions.region(...regions).https.onRequest(AuthenticationApp.create("Github"));
 }
 
-export function customAuthentication(authenticationUrl: string) {
-  return functions.https.onRequest(
+export function customAuthentication(regions: string[], authenticationUrl: string) {
+  return functions.region(...regions).https.onRequest(
     AuthenticationApp.create("Custom", authenticationUrl)
   );
 }

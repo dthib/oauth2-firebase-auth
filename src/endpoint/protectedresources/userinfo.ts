@@ -5,6 +5,11 @@ import { ProtectedResourceEndpointResponse } from "oauth2-nodejs";
 import { AbstractProtectedResourceEndpoint } from "./abstract_protected_resource_endpoint";
 
 export class UserinfoEndpoint extends AbstractProtectedResourceEndpoint {
+
+  constructor(regions: string[]) {
+    super(regions)
+  }
+
   protected handleRequest(
     req: express.Request,
     endpointInfo: ProtectedResourceEndpointResponse
@@ -34,6 +39,6 @@ export class UserinfoEndpoint extends AbstractProtectedResourceEndpoint {
   }
 }
 
-export function userinfo(): functions.HttpsFunction {
-  return new UserinfoEndpoint().endpoint;
+export function userinfo(regions: string[]): functions.HttpsFunction {
+  return new UserinfoEndpoint(regions).endpoint;
 }
